@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for i in "$@"; do
+  find "$i" -type f -name "__MACOSX" -delete -or -type f -name ".DS_Store" -delete -or -type f -name "._*" -delete
+done

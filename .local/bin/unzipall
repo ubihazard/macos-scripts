@@ -1,0 +1,14 @@
+#!/bin/bash
+
+dir=${@: -1}
+
+if [ ${dir:0:1} == '-' ]; then
+  dir=${dir:1}
+  set -- "${@:1:$(($#-1))}"
+else
+  dir=
+fi
+
+for i in "$@"; do
+  unzipit "$i" "$dir"
+done

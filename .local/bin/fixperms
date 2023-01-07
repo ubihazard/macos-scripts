@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Repair UNIX file permissions.
+
+for i in "$@"; do
+  find "$i" -type d -print0 | xargs -0 chmod 755
+  find "$i" -type f -print0 | xargs -0 chmod 644
+
+  # Now fix macOS executables
+  find "$i" -type f -path "*/Contents/MacOS/*" -print0 | xargs -0 chmod 755
+done

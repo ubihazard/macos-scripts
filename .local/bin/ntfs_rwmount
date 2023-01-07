@@ -1,0 +1,61 @@
+#!/bin/bash
+
+if [ $1 == "" ] || [ $1 == "-h" ] || [ $1 == "--help" ]; then
+  echo "Usage: ntfs_rwmount /Volumes/NTFS [--force]"
+  exit 1
+fi
+
+# Get the input volume path
+volpath="$1"
+if [ ! -d "$volpath" ]; then
+  echo "Volume path \"$volpath\" not found"
+  exit 1
+fi
+
+# `basename` works around trailing slash,
+# but we might want this for pretty printing
+if [ ${volpath: -1:1} == '/' ]; then
+  volpath=${volpath%%/}
+fi
+
+# Extract the volume name
+vol=`basename "$volpath"`
+
+# Do not do anything with a system volume
+if [ -d "$volpath/Windows" ]; then
+  if [ $2 != "--force" ]; then
+    echo "\"$vol\" is a system volume: won't re-mount as writable"
+    exit 1
+  fi
+fi
+
+# Find out if the volume is mounted read-only
+ro=no
+touch "$volpath/System Volume Information" 2>&1 | grep -i "read-only" > /dev/null
+if [ $? -eq 1 ]; then
+  echo "Re-mounting \"$vol\" back as read-only"
+  rm "$volpath/System Volume Information" &> /dev/null
+else
+  echo "Re-mounting \"$vol\" as writable"
+  ro=yes
+fi
+
+# Find out which disk identifier under `/dev` it belongs to
+disk=`diskutil list | grep 'Microsoft Basic Data' | grep "$vol" | sed -n 's/.*disk/disk/p'`
+if [ "$disk" == "" ]; then
+  echo "Couldn't find disk identifier for volume \"$vol\". Is it really a NTFS volume?"
+  exit 1
+fi
+
+# Re-mount as writable if mounted read-only,
+# and vice versa
+if [ $ro == "yes" ]; then
+  diskutil unmount "$volpath"
+  sudo mkdir "$volpath"
+  sudo mount -t ntfs -o rw,auto,nobrowse /dev/$disk "$volpath"
+  volmute "$volpath"
+else
+  sudo umount /dev/$disk
+  sudo rmdir "$volpath"
+  diskutil mount $disk
+fi

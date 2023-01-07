@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Quick extraction scripts.
+
+if [ ! -f "$1" ]; then
+  echo "Can't find: $1"
+  exit 1
+fi
+
+# RAR format version
+file=`basename "$1"`
+fnam="${file%.*}"
+fext="${file##*.}"
+flat=0
+
+if [ "$2" = "" ]; then
+  dirn=`dirname "$1"`
+else
+  dirn=$2
+  if [ ${dirn:0:1} = '@' ] && [ ! -d "$dirn" ]; then
+    dirn=${dirn:1}
+    if [ "$dirn" == "" ]; then
+      dirn=.
+    fi
+    flat=1
+  fi
+fi
+
+if [ $flat -eq 0 ]; then
+  out="$dirn/$fnam"
+
+  if [ -d "$out" ]; then
+    if [ "$2" = "" ]; then
+      out="`dirname "$1"`/$fnam-$((100000 + RANDOM))"
+    else
+      out="$2/$fnam-$((100000 + RANDOM))"
+    fi
+  fi
+else
+  out="$dirn"
+fi
+
+if [ -d "$out" ] && [ $flat -eq 0 ]; then
+  echo "Already exists: $out"
+  exit 1
+else
+  mkdir -p "$out"
+
+  if [ $? -ne 0 ]; then
+    echo "Can't extract to: $out"
+    exit 1
+  fi
+fi
+
+unrar x "$1" "$out"
+lines=`ls -A "$out" | wc -l`
+
+if [ $lines -eq 1 ] && [ $flat -eq 0 ]; then
+  new=
+  name=`ls -A "$out" | tail -n +1`
+
+  if [ -e "$out/../$name" ]; then
+    if [ "$out" != "$dirn/$name" ]; then
+      if [ -d "$out/$name" ]; then
+        new=`basename "$out"`
+      fi
+    fi
+  fi
+
+  temp="$out-$((100000 + RANDOM))"
+  mv "$out" "$temp"
+  [ ! $? -eq 0 ] && exit 1
+  mv "$temp/$name" "$temp/../$new"
+  [ ! $? -eq 0 ] && exit 1
+  rmdir "$temp"
+fi

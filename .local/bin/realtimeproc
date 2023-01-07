@@ -1,0 +1,10 @@
+#!/bin/bash
+
+name=$1
+pid=`ps ax | grep -i "$name" | awk '{print $1}'`
+
+if [ "$pid" != "" ]; then
+  realtimepid $pid
+else
+  echo "Not found: $name"
+fi

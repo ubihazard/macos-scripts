@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Disown files and/or directories.
+
+for i in "$@"; do
+  sudo chown -R nobody:nobody "$1"
+done

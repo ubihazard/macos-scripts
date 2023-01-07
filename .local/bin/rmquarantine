@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Remove annoying quarantine attribute
+# from downloaded files.
+
+for i in "$@"; do
+  xattr -dr com.apple.quarantine "$i"
+done

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Reset OS metadata on the specified volume.
+# DO NOT RUN ON THE SYSTEM VOLUME!
+
+vol=$1
+
+if [ ! -d "$vol" ]; then
+  echo "Invalid volume path"
+  exit 1
+fi
+
+# Windows
+if [ -d  "$vol/\$RECYCLE.BIN" ]; then
+  rm -rf "$vol/\$RECYCLE.BIN"
+fi
+
+if [ -d  "$vol/System Volume Information" ]; then
+  rm -rf "$vol/System Volume Information"
+fi
+
+# Linux
+if [ -d  "$vol/.Trash" ]; then
+  rm -rf "$vol/.Trash"
+fi
+
+if [ -d  "$vol/.Trash-1000" ]; then
+  rm -rf "$vol/.Trash-1000"
+fi
+
+if [ -d  "$vol/lost+found" ]; then
+  rm -rf "$vol/lost+found"
+fi
+
+# macOS
+if [ -d  "$vol/.Trashes" ]; then
+  rm -rf "$vol/.Trashes"
+fi
+
+if [ -d  "$vol/.fseventsd" ]; then
+  rm -rf "$vol/.fseventsd"
+fi
+
+if [ -d  "$vol/.Spotlight-V100" ]; then
+  rm -rf "$vol/.Spotlight-V100"
+fi
+
+if [ -d  "$vol/.DocumentRevisions-V100" ]; then
+  rm -rf "$vol/.DocumentRevisions-V100"
+fi
+
+if [ -d  "$vol/.TemporaryItems" ]; then
+  rm -rf "$vol/.TemporaryItems"
+fi
+
+rmjunk "$vol"

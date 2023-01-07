@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# `pkgutil` uninstall scripts.
+
+[ "$PKGVOLUME" = "" ] && PKGVOLUME=/
+
+pkg=$1
+
+if [ "$pkg" = "" ]; then
+  echo "Invalid package id"
+  exit 1
+fi
+
+pkgutil --volume="$PKGVOLUME" --pkg-info "$pkg"

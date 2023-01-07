@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for i in "$@"; do
+  rar l "$i"
+done

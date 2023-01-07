@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <volume name> <folder> [<destination>]"
+  exit 1
+fi
+
+# Custom output file name
+out="$2/../`basename "$2"`.dmg"
+
+if [ "$3" != "" ]; then
+  if [ -d "$3" ]; then
+    out="$3/`basename "$2"`.dmg"
+  else
+    out=$3
+  fi
+fi
+
+hdiutil create -fs HFS+ -volname "$1" -srcfolder "$2" -ov -format UDBZ "$out"

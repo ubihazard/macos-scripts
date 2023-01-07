@@ -1,0 +1,31 @@
+#!/bin/bash
+
+pkg="$1"
+name=`basename "$pkg"`
+
+dir=`pwd`
+cd /
+[ ! -f "$pkg" ] && pkg=$dir/$pkg
+cd "$dir"
+[ $? -ne 0 ] && exit 1
+
+[ -d "pkg/$name" ] && rm -rf "pkg/$name"
+mkdir -p "pkg"; cd "pkg"
+[ $? -ne 0 ] && exit 1
+
+pkgutil --expand "$pkg" "$name" && cd "$name"
+[ $? -ne 0 ] && exit 1
+
+if [ -f Payload ]; then
+  mkdir .payload
+  tar xzvf Payload -C .payload
+  rm Payload && mv .payload Payload
+fi
+
+for p in *.pkg; do
+  cd "$p"
+  mkdir .payload
+  tar xzvf Payload -C .payload
+  rm Payload && mv .payload Payload
+  cd ..
+done

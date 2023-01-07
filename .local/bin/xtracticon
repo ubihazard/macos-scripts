@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Extract custom folder (or `.app` bundle) icon.
+
+icon="$(dirname $1)/$(basename $1)/$(printf 'Icon\r')/..namedfork/rsrc"
+
+if [ -f "$icon" ]; then
+  cp "$icon" ~/Desktop/icon.icns
+  size=`wc -c ~/Desktop/icon.icns | awk '{print $1}'`
+  tail -c +261 ~/Desktop/icon.icns | head -c $(($size-261-49)) > /tmp/xtracticon
+  cp /tmp/xtracticon ~/Desktop/icon.icns
+  rm /tmp/xtracticon
+else
+  echo "Custom icon not found in resource fork: $(dirname $1)/$(basename $1)/Icon?/..namedfork/rsrc"
+fi

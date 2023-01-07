@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Quick extraction scripts.
+
+if [ ! -f "$1" ]; then
+  echo "Can't find: $1"
+  exit 1
+fi
+
+# Other formats version
+if [ ! -d "$2" ]; then
+  out=`dirname "$1"`
+else
+  out=$2
+fi
+
+unar -k skip -nq -o "$out" "$1"

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Remove *all* extended attributes from files.
+
+for i in "$@"; do
+  xattr -cr "$i"
+done

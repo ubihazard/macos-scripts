@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for i in "$@"; do
+  if [ -e "$i" ]; then
+    sudo unquarantine "$i"
+    sudo codesign --force --deep --sign - "$i"
+  else
+    echo "Not found: $i"
+  fi
+done

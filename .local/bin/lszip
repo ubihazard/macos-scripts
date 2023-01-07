@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for i in "$@"; do
+  unzip -l "$i"
+done

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# `pkgutil` uninstall scripts.
+
+[ "$PKGVOLUME" = "" ] && PKGVOLUME=/
+
+pkg=$1
+dry=$2
+
+if [ "$pkg" = "" ]; then
+  echo "Invalid package id"
+  exit 1
+fi
+
+# Find out the package installation root
+pkgvol=`pkgutil --volume="$PKGVOLUME" --pkg-info "$pkg" | sed '3q;d' | awk '{$1=""; print substr($0,2)}'`
+
+if [ "$pkgvol" = "" ]; then
+  echo "Invalid package volume"
+  exit 1
+fi
+
+# Custom root
+if [ "$3" != "" ]; then
+  pkgroot=$3
+else
+  pkgroot=`pkgutil --volume="$PKGVOLUME" --pkg-info "$pkg" | sed '4q;d' | awk '{$1=""; print substr($0,2)}'`
+fi
+
+# Go there
+cd "$pkgvol/$pkgroot" &> /dev/null
+[ $? -ne 0 ] && exit 1
+
+if [ "$dry" = "-r" ] || [ "$dry" = "--real" ] ; then
+  # Remove its files
+  pkgutil --volume="$PKGVOLUME" --only-files --files "$pkg" > /tmp/pkgfiles
+  sudo bash -c 'IFS="" && for f in `cat /tmp/pkgfiles`; do rm -f "$f"; done'
+  rm /tmp/pkgfiles
+
+  # And directories
+  pkgutil --volume="$PKGVOLUME" --only-dirs  --files "$pkg" | tail -r > /tmp/pkgdirs
+  sudo bash -c 'IFS="" && for d in `cat /tmp/pkgdirs`; do rmdir "$d"; done'
+  rm /tmp/pkgdirs
+
+  # Remove the package metadata
+  pkgforget "$pkg"
+else
+  echo "* * * Dry run * * *" && echo ""
+  echo "Root is: $pkgvol/$pkgroot" && echo ""
+
+  pkgutil --volume="$PKGVOLUME" --only-files --files "$pkg" | tr '\n' '\0' | xargs -n 1 -0 echo "Removing file: "
+  pkgutil --volume="$PKGVOLUME" --only-dirs  --files "$pkg" | tail -r | tr '\n' '\0' | xargs -n 1 -0 echo "Removing directory: "
+fi

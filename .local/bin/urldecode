@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sed 's/+/ /g' | perl -MURI::Escape -e 'print uri_unescape(<STDIN>)'
+echo

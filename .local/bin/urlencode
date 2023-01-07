@@ -1,0 +1,4 @@
+#!/bin/bash
+
+perl -MURI::Escape -e 'print uri_escape(<STDIN>)'
+echo

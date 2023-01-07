@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Make the "flat" (compressed) single-file package
+# out of a classic old-style multi-file package bundle.
+
+pkg=$1
+name=`basename "$1"`
+
+if [ ! -f "$pkg" ]; then
+  echo "Not found: $pkg"
+fi
+
+rm -rf "/var/tmp/$name"
+pkgutil --expand "$pkg" "/var/tmp/$name"
+pkgutil --flatten "/var/tmp/$name" "$pkg"
+rm -rf "/var/tmp/$name"

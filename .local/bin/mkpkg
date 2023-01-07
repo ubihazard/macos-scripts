@@ -1,0 +1,7 @@
+#!/bin/bash
+
+user=`id -u`
+group=`id -g`
+
+sudo $HOME/.local/bin/\$/repkg "$1"
+sudo chown $user:$group "$1"

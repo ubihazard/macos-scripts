@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Band-aid USB flash drive before macOS throws a party on it.
+# DO NOT RUN ON THE SYSTEM VOLUME!
+
+vol=$1
+
+if [ ! -d "$vol" ]; then
+  echo "$0: Invalid volume path"
+  exit 1
+fi
+
+if [ -d "$vol/System" ]; then
+  echo "$0: Cannot run on system volume"
+  exit 1
+fi
+
+# Mute file system events
+if [ ! -f "$vol/.fseventsd/no_log" ]; then
+  rm -rf "$vol/.fseventsd"
+  mkdir  "$vol/.fseventsd"
+  touch  "$vol/.fseventsd/no_log"
+fi
+
+# Disable Spotlight index
+if [ ! -f "$vol/.Spotlight-V100" ]; then
+  rm -rf "$vol/.Spotlight-V100"
+  touch  "$vol/.Spotlight-V100"
+  touch  "$vol/.metadata_never_index"
+fi
+
+# Disable trash can
+if [ ! -f "$vol/.Trashes" ]; then
+  rm -rf "$vol/.Trashes"
+  touch  "$vol/.Trashes"
+fi
+
+# Clean up document revisions and disable time machine prompt
+rm -rf "$vol/.TemporaryItems"
+touch  "$vol/.com.apple.timemachine.donotpresent"

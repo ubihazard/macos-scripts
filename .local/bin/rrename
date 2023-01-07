@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Give input files random names.
+
+for f in "$@"; do
+  path=$f
+  dir=`dirname "$path"`
+  name=`basename "$path"`
+  ext=`echo ${name##*.} | awk '{print tolower($0)}'`
+  if [ "$ext" == "$name" ]; then
+    ext=
+  else
+    ext=.$ext
+  fi
+  nname=`uuidgen | awk '{print tolower($0)}'`
+  nname=${nname//-/}
+  mv "$path" "$dir/$nname$ext"
+done

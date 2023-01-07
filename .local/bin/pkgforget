@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# `pkgutil` uninstall scripts.
+
+[ "$PKGVOLUME" = "" ] && PKGVOLUME=/
+
+pkg=$1
+
+if [ "$pkg" = "" ]; then
+  echo "Invalid package id"
+  exit 1
+fi
+
+# Workaround some receipt files being put in
+# `/System/Library/Receipts` instead of `/var/db/receipts`
+# (happens on system volumes with Apple software)
+if [ ! -f "$PKGVOLUME/var/db/receipts/$pkg.bom" ]; then
+	volume="$PKGVOLUME/System"
+fi
+
+sudo pkgutil --volume="$PKGVOLUME" --forget "$pkg"

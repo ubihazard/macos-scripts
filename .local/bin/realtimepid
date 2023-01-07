@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pid=$1
+sudo renice -20 -p $pid

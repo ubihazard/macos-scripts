@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# `pkgutil` uninstall scripts.
+
+[ "$PKGVOLUME" = "" ] && PKGVOLUME=/
+
+pkg=$1
+
+if [ "$pkg" = "" ]; then
+  echo "Invalid package id"
+  exit 1
+fi
+
+pkgvol=`pkgutil --volume="$PKGVOLUME" --pkg-info "$pkg" | sed '3q;d' | awk '{$1=""; print substr($0,2)}'`
+
+if [ "$pkgvol" = "" ]; then
+  echo "Invalid package volume"
+  exit 1
+fi
+
+pkgroot=`pkgutil --volume="$PKGVOLUME" --pkg-info "$pkg" | sed '4q;d' | awk '{$1=""; print substr($0,2)}'`
+
+# List the package contents
+echo "$pkgvol/$pkgroot:"
+pkgutil --volume="$PKGVOLUME" --files "$pkg"

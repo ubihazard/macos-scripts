@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Launch Transmission with HTTP proxy
+# to bypass ISP restrictions.
+
+export http_proxy=http://127.0.0.1:8080
+$HOME/Applications/Transmission.app/Contents/MacOS/Transmission > /dev/null & disown

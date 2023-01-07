@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Quick compression scripts.
+
+path=`dirname "$1"`
+
+if [ "$path" = "" ]; then
+  path=.
+fi
+
+outpath=$path
+base=`basename "$1"`
+
+if [ "$base" = "*" ]; then
+  nostar=${1/\*/}
+  name=`basename "$nostar"`
+  if [ "$name" = "" ]; then
+    name=`basename "$PWD"`
+  fi
+else
+  name=$base
+  if [ ! -f "$1" ]; then
+    if [ ! -d "$1" ]; then
+      echo "Can't find: $1"
+      exit 1
+    fi
+  fi
+fi
+
+# ZIP format version
+if [ "$2" = "" ]; then
+  outpath=$outpath/
+  out=$name.zip
+else
+  outpath=
+  out="$2"
+  outdir=`dirname "$out"`
+  if [ "$outdir" != "" ]; then
+    mkdir -p "$outdir"
+    if [ $? -ne 0 ]; then
+      echo "Can't create: $outdir"
+      exit 1
+    fi
+    if [ "$outdir/" = "$out" ]; then
+      out=$out$name.zip
+    fi
+  fi
+fi
+
+if [ -f "$outpath$out" ]; then
+  if [ "$2" = "" ]; then
+    out="$name-$((100000 + RANDOM)).zip"
+  elif [ "$outdir/$name.zip" = "$out$name.zip" ]; then
+    out=$outdir/$name-$((100000 + RANDOM)).zip
+  fi
+  if [ -f "$outpath$out" ]; then
+    echo "Already exists: $outpath$out"
+    exit 1
+  fi
+fi
+
+pushd "$path" > /dev/null
+for i in $base; do
+  echo $i
+done | zip -9 -X -@ -r "$out" -x "*__MACOSX" "*.DS_Store" "*._*" "*.svn" "*.git" "*.hg"
+popd > /dev/null

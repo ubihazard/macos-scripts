@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <volume name> <folder>"
+  exit 1
+fi
+
+# Custom output file name
+out="$2/../`basename "$2"`.iso"
+
+if [ "$3" != "" ]; then
+  if [ -d "$3" ]; then
+    out="$3/`basename "$2"`.iso"
+  else
+    out=$3
+  fi
+fi
+
+hdiutil makehybrid -iso -joliet -udf -default-volume-name "$1" -o "$out" "$2"

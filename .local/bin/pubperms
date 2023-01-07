@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Grant all permissions on specified files and/or directories.
+
+for i in "$@"; do
+  if [ $EUID -eq 0 ]; then
+    chown -R root:wheel "$1"
+  fi
+
+  chmod -R 777 "$i"
+done

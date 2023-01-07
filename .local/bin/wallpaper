@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# macOS doesn't have a wallpaper setter.
+
+wall="$1"
+dir=`pwd`
+cmd="$0"
+cd /
+
+function try_set_wall()
+{
+  wall=`COLUMNS=1 ls $HOME/Pictures/Wallpapers/Time\ of\ Day | grep "^$1\."`
+  if [ -f "$HOME/Pictures/Wallpapers/Time of Day/$wall" ]; then
+    "$cmd" "$HOME/Pictures/Wallpapers/Time of Day/$wall"
+    return 1
+  fi
+  return 0
+}
+
+if [ "$wall" == "--timeofday" ]; then
+  if [ ! -d "$HOME/Pictures/Wallpapers/Time of Day" ]; then
+    echo "Time-based wallpaper selection is not available"
+    exit 1
+  fi
+  hr=`date +"%H"`
+  hr=$((10#${hr}))
+  [[ $hr -gt -1 ]] && [[ $hr -lt 4  ]] && try_set_wall "Night" && exit 1
+  [[ $hr -gt  3 ]] && [[ $hr -lt 6  ]] && try_set_wall "Early Morning" && try_set_wall "Morning" && exit 1
+  [[ $hr -gt  5 ]] && [[ $hr -lt 8  ]] && try_set_wall "Morning" && exit 1
+  [[ $hr -gt  7 ]] && [[ $hr -lt 12 ]] && try_set_wall "Early Afternoon" && try_set_wall "Afternoon" && exit 1
+  [[ $hr -gt 11 ]] && [[ $hr -lt 16 ]] && try_set_wall "Afternoon" && try_set_wall "Late Afternoon" && exit 1
+  [[ $hr -gt 15 ]] && [[ $hr -lt 18 ]] && try_set_wall "Late Afternoon" && exit 1
+  [[ $hr -gt 17 ]] && [[ $hr -lt 20 ]] && try_set_wall "Evening" && try_set_wall "Late Evening" && exit 1
+  [[ $hr -gt 19 ]] && [[ $hr -lt 22 ]] && try_set_wall "Late Evening" && exit 1
+  [[ $hr -gt 21 ]] && [[ $hr -lt 24 ]] && try_set_wall "Night" && exit 1
+  exit 0
+fi
+
+if [ ! -f "$wall" ]; then
+  wall="$dir/$wall"
+fi
+
+if [ ! -f "$wall" ]; then
+  echo "Not found: $wall"
+  exit 1
+fi
+
+osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$wall\""

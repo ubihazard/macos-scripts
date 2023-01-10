@@ -6,7 +6,7 @@ In order to use scripts under `bin` folder, clone this repository in your home f
 export PATH=$HOME/.local/bin:$PATH
 ```
 
-Restart Terminal or open new terminal window (or tab) with `bash` session for changes to take effect.
+Restart Terminal or open new terminal window (or tab) with new `bash` or `zsh` (or other shell) session for changes to take effect.
 
 # ⭐ Support
 

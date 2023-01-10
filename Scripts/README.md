@@ -71,6 +71,18 @@ sudo spctl --global-disable
 
 Replace `disable` with `enable` to restore Gatekeeper.
 
+### Rebuild kernel cache
+
+Up until Big Sur rebuilding of kernel cache can be done with:
+
+```bash
+sudo kextcache -i / && sudo kextcache -u /
+```
+
+On Catalina the root volume [has to be mounted in write mode](#mount-root-volume).
+
+See [below](#rebuild-kernel-cache-2) for instructions on how to rebuild kext cache in Big Sur.
+
 ## Catalina
 
 ### Mount root volume

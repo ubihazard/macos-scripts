@@ -79,13 +79,13 @@ Up until Big Sur rebuilding of kernel cache can be done with:
 sudo kextcache -i / && sudo kextcache -u /
 ```
 
-On Catalina the root volume [has to be mounted in write mode](#mount-root-volume).
+On Catalina the root volume [has to be mounted in write mode](#mount-root-volume-as-writable).
 
-See [below](#rebuild-kernel-cache-2) for instructions on how to rebuild kext cache in Big Sur.
+See [below](#rebuild-kernel-cache-1) for instructions on how to rebuild kext cache in Big Sur.
 
 ## Catalina
 
-### Mount root volume
+### Mount root volume as writable
 
 In Catalina the root volume is mounted read-only. If you need to make changes to it you would need to re-mount it as writable:
 

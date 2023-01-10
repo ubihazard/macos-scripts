@@ -107,7 +107,7 @@ sudo kmutil install --force --update-all --volume-root ~/.local/root
 
 ### Change the sleep timeout
 
-Big Sur seemingly removed ability to set the timeout when machine goes to sleep independently from the display turn off timeout. It can still be configured using command line (in minutes):
+Big Sur seemingly removed ability to set the timeout when machine goes to sleep independently from the display sleep timeout. It can still be configured using command line (in minutes):
 
 ```bash
 sudo pmset -a sleep 30

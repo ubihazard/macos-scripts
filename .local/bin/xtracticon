@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Extract custom folder (or `.app` bundle) icon.
-
-icon="$(dirname $1)/$(basename $1)/$(printf 'Icon\r')/..namedfork/rsrc"
+icon=$(dirname "$1")/$(basename "$1")/$(printf 'Icon\r')/..namedfork/rsrc
 
 if [ -f "$icon" ]; then
   cp "$icon" ~/Desktop/icon.icns

@@ -1,4 +1,5 @@
 import sublime, sublime_plugin
+from pathlib import Path
 import subprocess
 
 #def plugin_loaded():
@@ -6,4 +7,4 @@ import subprocess
 
 class EventListener(sublime_plugin.EventListener):
 	def on_exit(self):
-		subprocess.Popen(['subl_clean_session'])
+		subprocess.Popen([str(Path.home()) + '/.local/bin/subl_clean_session'])

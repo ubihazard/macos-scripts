@@ -1,0 +1,26 @@
+#!/bin/bash
+
+link=$1
+static=static-$1
+volatile=/Volumes/RAM/firefox-$1-$USER
+
+IFS=
+set -efu
+
+cd "$HOME/Library/Application Support/Firefox/Profiles"
+
+if [ ! -r $volatile ]; then
+	mkdir -m0700 $volatile
+fi
+
+if [ "$(readlink $link)" != "$volatile" ]; then
+	mv $link $static &> /dev/null
+	ln -s $volatile $link
+fi
+
+if [ -e $link/.unpacked ]; then
+	rsync -av --delete --exclude .unpacked ./$link/ ./$static/
+else
+	rsync -av ./$static/ ./$link/
+	touch $link/.unpacked
+fi

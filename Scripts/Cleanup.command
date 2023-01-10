@@ -8,6 +8,7 @@ rm -f .bash_history
 rm -f .bash_sessions/*
 rmdir .bash_sessions
 rm -f .lesshs*
+rm -f .python_history
 rm -f .node_repl_history
 rm -f .mysql_history
 rm -f .mysqlsh/*

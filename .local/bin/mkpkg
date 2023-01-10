@@ -3,5 +3,5 @@
 user=`id -u`
 group=`id -g`
 
-sudo $HOME/.local/bin/\$/repkg "$1"
+sudo $HOME/.local/bin/\$/repkg.sh "$1"
 sudo chown $user:$group "$1"

@@ -1,5 +1,5 @@
 #!/bin/bash
 
 for i in "$@"; do
-  7z l "$i"
+  7za l "$i"
 done

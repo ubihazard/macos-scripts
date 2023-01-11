@@ -6,9 +6,11 @@
   <string>Firefox profile sync</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/user/.local/bin/$/firefox_sync.sh</string>
+    <string>/Users/user/.local/bin/firefox-sync</string>
     <string>profile</string>
   </array>
+  <key>StartInterval</key>
+  <integer>1800</integer>
   <key>RunAtLoad</key>
   <true/>
 </dict>

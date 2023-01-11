@@ -104,6 +104,7 @@ mkdir -p ~/.local/root
 sudo mount -o nobrowse -t apfs /dev/diskXsY ~/.local/root
 echo your changes here...
 sudo bless --folder ~/.local/root/System/Library/CoreServices --bootefi --create-snapshot
+sudo umount ~/.local/root
 rmdir ~/.local/root
 ```
 

@@ -32,6 +32,13 @@ defaults write -app 'Pixelmator' ApplePersistence -bool no
 defaults write -app 'Pixelmator Pro' ApplePersistence -bool no
 ```
 
+### Clear Finder Go to “Folder...” history
+
+```bash
+defaults delete com.apple.finder GoToField
+defaults delete com.apple.finder GoToFieldHistory
+```
+
 ### Allow Finder to quit
 
 ```bash

@@ -8,6 +8,7 @@
   <array>
     <string>/Users/user/.local/bin/firefox-sync</string>
     <string>profile</string>
+    <string>no</string>
   </array>
   <key>StartInterval</key>
   <integer>1800</integer>

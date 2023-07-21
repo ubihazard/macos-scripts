@@ -7,8 +7,8 @@
   <key>ProgramArguments</key>
   <array>
     <string>/Users/user/.local/bin/firefox-sync</string>
-    <string>profile</string>
-    <string>no</string>
+    <string>xxxxxxxx.default-release</string>
+    <string>yes</string>
   </array>
   <key>StartInterval</key>
   <integer>1800</integer>

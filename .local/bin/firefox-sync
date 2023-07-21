@@ -1,20 +1,34 @@
 #!/bin/bash
 
+launchctl=no
+
+[ $# -eq 0 ] && exit 1
+[ $# -gt 1 ] && launchctl=$2
+
 link=$1
 static=static-$1
 volatile=/Volumes/RAM/firefox-$1-$USER
-startup=no
 
 IFS=
 set -efu
 
-cd "$HOME/Library/Application Support/Firefox/Profiles"
-
-if [ ! -d "/Volumes/RAM" ]; then
-  startup=yes
-  chmod -x "$HOME/Applications/Firefox.app/Contents/MacOS/firefox"
-  $HOME/.local/bin/ramdisk 512
+if [ "$launchctl" = "yes" ]; then
+  ffox=`ps ax | grep -i firefox.app/contents/macos/firefox | grep -v grep`
+  [ "$ffox" = "" ] && exit # Firefox is not running
 fi
+
+# RAM disk is not available
+[ ! -d "/Volumes/RAM" ] && exit
+
+# Acquire lock
+if { set -C; 2>/dev/null > "$volatile.lock"; }; then
+  trap "rm -f \"$volatile.lock\"" EXIT
+else
+  # Lock exists
+  exit
+fi
+
+cd "$HOME/Library/Application Support/Firefox/Profiles"
 
 if [ ! -r $volatile ]; then
   mkdir -m0700 $volatile
@@ -30,12 +44,4 @@ if [ -e $link/.unpacked ]; then
 else
   rsync -av ./$static/ ./$link/
   touch $link/.unpacked
-fi
-
-if [ $startup == "yes" ]; then
-  chmod +x "$HOME/Applications/Firefox.app/Contents/MacOS/firefox"
-fi
-
-if [ "$2" == "logout" ]; then
-  $HOME/.local/bin/ramdisk detach
 fi

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+profile=xxxxxxxx.default-release
+
+ffox=`ps ax | grep -i firefox.app/contents/macos/firefox | grep -v grep`
+if [ "$ffox" != "" ]; then
+  # Firefox is already running
+  osascript -e 'activate application "Firefox"'
+  exit 1
+fi
+
+try=1
+try_limit=10
+while true; do
+  [ -d "/Volumes/RAM" ] && break
+  echo $try
+  let try=$try+1
+  [ $try -eq $((try_limit+1)) ] && exit 1 # RAM disk is not available
+  sleep 1
+done
+
+if [ ! -d "/Volumes/RAM/firefox-$profile-$USER" ]; then
+  # Profile is not cached in RAM
+  $HOME/.local/bin/firefox-sync $profile
+  sleep 1
+fi
+
+if [ ! -d "/Volumes/RAM/firefox-$profile-$USER" ]; then
+  # Profile could not be cached in RAM
+  osascript -e 'display dialog "RAM cache is not available." buttons {"OK"} default button 1' > /dev/null 2>&1
+  exit 1
+fi
+
+$HOME/Applications/Firefox.app/Contents/MacOS/firefox > /dev/null 2>&1
+sleep 1 # wait a sec
+$HOME/.local/bin/firefox-sync $profile

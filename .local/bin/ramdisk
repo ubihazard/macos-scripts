@@ -3,16 +3,18 @@
 name="RAM"
 
 if [ "$1" = "" ]; then
-  echo "Usage: $0 <size in MB> | detach"
+  echo "Usage: $0 <size in MB> | detach [\"volume name\"]"
   exit
 fi
+
+[ $# -gt 1 ] && name=$2
 
 if [ "$1" != "detach" ]; then
   size=$(($1 * 2048))
   diskutil erasevolume HFS+ "$name" `hdiutil attach -nomount ram://$size`
 else
   if [ ! -d "/Volumes/$name" ]; then
-    echo "RAM disk /Volumes/$name not found"
+    echo "RAM disk \"/Volumes/$name\" not found"
     exit 1
   fi
 

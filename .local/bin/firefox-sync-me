@@ -5,6 +5,11 @@ profile=xxxxxxxx.default-release
 ffox=`ps ax | grep -i firefox.app/contents/macos/firefox | grep -v grep`
 if [ "$ffox" != "" ]; then
   # Firefox is already running
+  $(osascript << EOT
+    tell application "Firefox"
+      set miniaturized of windows where miniaturized is true to false
+    end tell
+  EOT) # Requires permissions from applet or Terminal.app (will be prompted)
   osascript -e 'activate application "Firefox"'
   exit 1
 fi

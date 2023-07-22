@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Restore Sublime Text session (windows) to a clean state.
-
-src="$HOME/Library/Application Support/Sublime Text/Local/Session.sublime_session"
-dst="${src}_clean"
-
-sleep 2
-cp "$dst" "$src"

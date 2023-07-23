@@ -161,6 +161,16 @@ sudo mdutil -a -d
 sudo mdutil -a -i off
 ```
 
+## Airport
+
+Control Airport from Terminal.app:
+
+```bash
+ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport ~/.local/bin/airport
+rehash
+airport
+```
+
 # ⭐ Support
 
 If you find anything of this useful, you can [buy me a ☕](https://www.buymeacoffee.com/ubihazard "Donate")!

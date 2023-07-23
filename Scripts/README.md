@@ -135,25 +135,25 @@ sudo pmset -a sleep 30
 
 ## Spotlight
 
-### Erase (and rebuild) index on volume
+Erase (and rebuild) index on volume:
 
 ```bash
 sudo mdutil -E /Volumes/Data
 ```
 
-### Disable searching of volume
+Disable searching of volume:
 
 ```bash
 sudo mdutil -d /Volumes/Data
 ```
 
-### Disable indexing of volume
+Disable indexing of volume:
 
 ```bash
 sudo mdutil -i off /Volumes/Data
 ```
 
-### Disable Spotlight on all volumes
+Disable Spotlight on all volumes:
 
 ```bash
 sudo mdutil -a -E

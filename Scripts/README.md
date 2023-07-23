@@ -53,7 +53,7 @@ defaults write com.apple.finder QuitMenuItem -bool true
 sudo pmset -a hibernatemode 0
 ```
 
-Now you can also remove the sleep image (preserves RAM contents during sleep), freeing up some space on your SSD, which can be precious on some lower end Macs.
+Now you can also remove the sleep image (preserves RAM contents during sleep), freeing up some space on your SSD, which can be precious on some lower end Macs:
 
 ```bash
 sudo rm /var/vm/sleepimage

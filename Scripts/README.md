@@ -204,7 +204,8 @@ iconutil -c icns icon.iconset
 
 ```bash
 drutil tray eject
-# If it‘s still stuck
+
+# If it‘s stuck:
 hdiutil detach -force "/Volumes/DVD Volume Name"
 ```
 

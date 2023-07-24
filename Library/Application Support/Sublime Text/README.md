@@ -6,7 +6,7 @@ defaults write com.sublimetext.4 ApplePressAndHoldEnabled -bool false
 #defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false
 ```
 
-Turn off hardware acceleration in `Preferences.sublime-settings` (default seems to be `opengl`):
+Turn off hardware acceleration in `User/Preferences.sublime-settings` (default seems to be `opengl`):
 
 ```json
 "hardware_acceleration": "none"

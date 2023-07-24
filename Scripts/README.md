@@ -62,6 +62,14 @@ sudo mkdir /var/vm/sleepimage
 
 If you are on a hackintosh, turning hibernation off is necessary because “deep” sleep is not really supported on hacks.
 
+### Enable HiDPI resolutions on non-retina displays
+
+```bash
+sudo defaults write /Library/Preferences/com.apple.windowserver.plist DisplayResolutionEnabled -bool true
+```
+
+Log out and back in for the change to take effect. Unfortunately, this doesn‘t enable all resolutions that are technically possible. To unlock all resolutions a third-party app **SwitchResX** is needed.
+
 ### Disable Gatekeeper
 
 Before Catalina 10.5.6:

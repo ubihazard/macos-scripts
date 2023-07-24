@@ -26,7 +26,7 @@ In the past auto-update prompts could be disabled with:
 
 But this doesn‘t seem to work anymore.
 
-The current solution seems to be creating a distribution policy file. However, this will disable auto-updates themselves, not just prompts.
+The current solution seems to be creating a distribution policy file. However, this will also disable auto-updates themselves, – not just prompts.
 
 ```bash
 mkdir ~/Applications/Firefox.app/Contents/Resources/distribution

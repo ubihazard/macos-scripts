@@ -7,7 +7,7 @@ Increase the amount of RAM used for caching:
 | browser.cache.memory.capacity | 128
 | - | -
 
-Move on-disk browser cache to [RAM disk](/macos-scripts/blob/main/.local/bin/ramdisk):
+Move on-disk browser cache to [RAM disk](/.local/bin/ramdisk):
 
 | browser.cache.disk.parent_directory | /Volumes/RAM
 | - | -

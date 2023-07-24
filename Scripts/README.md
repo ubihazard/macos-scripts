@@ -1,4 +1,4 @@
-# macOS tweaks
+# macOS tricks & tweaks
 
 ## General tweaks
 
@@ -171,7 +171,7 @@ sudo mdutil -a -i off
 
 ## Airport
 
-Control Airport from Terminal.app:
+Control Airport from terminal:
 
 ```bash
 ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport ~/.local/bin/airport
@@ -200,7 +200,7 @@ mv icon.png icon.iconset/icon_512x512@2x.png
 iconutil -c icns icon.iconset
 ```
 
-### Eject disc from tray
+### Eject disc from tray via terminal
 
 ```bash
 drutil tray eject

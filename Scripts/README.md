@@ -192,6 +192,14 @@ mv icon.png icon.iconset/icon_512x512@2x.png
 iconutil -c icns icon.iconset
 ```
 
+### Eject disc from tray
+
+```bash
+drutil tray eject
+# If it‘s still stuck
+hdiutil detach -force /Volumes/DVD
+```
+
 # ⭐ Support
 
 If you find anything of this useful, you can [buy me a ☕](https://www.buymeacoffee.com/ubihazard "Donate")!

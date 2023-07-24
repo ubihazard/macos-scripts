@@ -1,6 +1,6 @@
 ## Add user executables to Path
 
-Create user `bin` directory and populate it with binaries and [shell scripts](/ubihazard/macos-scripts/tree/main/.local/bin "Scripts"):
+Create user `bin` directory and populate it with binaries and [shell scripts](https://github.com/ubihazard/macos-scripts/tree/main/.local/bin "Scripts"):
 
 ```bash
 mkdir -p $HOME/.local/bin

@@ -10,5 +10,5 @@ if [ -f "$icon" ]; then
   cp /tmp/xtracticon ~/Desktop/icon.icns
   rm /tmp/xtracticon
 else
-  echo "Custom icon not found in resource fork: $(dirname $1)/$(basename $1)/Icon?/..namedfork/rsrc"
+  echo "Custom icon not found in resource fork: "$(dirname "$1")/$(basename "$1")/$(printf 'Icon\r')"/..namedfork/rsrc"
 fi

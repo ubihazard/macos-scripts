@@ -35,6 +35,5 @@ if [ ! -f "$vol/.Trashes" ]; then
   touch  "$vol/.Trashes"
 fi
 
-# Clean up document revisions and disable time machine prompt
-rm -rf "$vol/.TemporaryItems"
+# Disable time machine prompt
 touch  "$vol/.com.apple.timemachine.donotpresent"

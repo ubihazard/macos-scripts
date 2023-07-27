@@ -53,7 +53,7 @@ if [ $ro == "yes" ]; then
   diskutil unmount "$volpath"
   sudo mkdir "$volpath"
   sudo mount -t ntfs -o rw,auto,nobrowse /dev/$disk "$volpath"
-  volmute "$volpath"
+  volnojunk "$volpath"
 else
   sudo umount /dev/$disk
   sudo rmdir "$volpath"

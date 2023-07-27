@@ -1,1 +1,1 @@
-do shell script "$HOME/.local/bin/firefox-sync-me > /dev/null 2>&1 & disown"
+do shell script "$HOME/.local/bin/firefox-launcher > /dev/null 2>&1 & disown"

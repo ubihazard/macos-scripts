@@ -9,8 +9,6 @@
     <string>/Users/user/.local/bin/ramdisk</string>
     <string>512</string>
   </array>
-  <key>LaunchOnlyOnce</key>
-  <true/>
   <key>RunAtLoad</key>
   <true/>
 </dict>

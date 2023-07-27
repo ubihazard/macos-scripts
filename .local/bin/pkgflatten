@@ -6,8 +6,9 @@
 pkg=$1
 name=`basename "$1"`
 
-if [ ! -f "$pkg" ]; then
+if [ ! -d "$pkg" ]; then
   echo "Not found: $pkg"
+  exit 1
 fi
 
 rm -rf "/var/tmp/$name"

@@ -141,6 +141,55 @@ Big Sur seemingly removed ability to set the timeout when machine goes to sleep 
 sudo pmset -a sleep 30
 ```
 
+### Change the password policy
+
+Restore the ability to set short passwords:
+
+```bash
+pwpolicy getaccountpolicies > policies.plist
+nano policies.plist
+```
+
+Remove the first line:
+
+```
+Getting global account policies
+```
+
+So that the file begins with:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+```
+
+Find the password length requirement setting at:
+
+```xml
+      <key>policyContent</key>
+      <string>policyAttributePassword matches '^$|.{4,}+'</string>
+```
+
+Change the match pattern from:
+
+```json
+'^$|.{4,}+'
+```
+
+To:
+
+```json
+'^$|.{1,}+'
+```
+
+Apply the new password policy:
+
+```bash
+pwpolicy setaccountpolicies policies.plist
+rm policies.plist
+```
+
+You can now change your password to a shorter one in `System Preferences -> Users & Groups` as you would do before.
+
 ## Spotlight
 
 Erase (and rebuild) index on volume:

@@ -24,16 +24,16 @@ if [ "$wall" == "--timeofday" ]; then
   fi
   hr=`date +"%H"`
   hr=$((10#${hr}))
-  [[ $hr -gt -1 ]] && [[ $hr -lt 4  ]] && try_set_wall "Night" && exit 1
-  [[ $hr -gt  3 ]] && [[ $hr -lt 6  ]] && try_set_wall "Early Morning" && try_set_wall "Morning" && exit 1
-  [[ $hr -gt  5 ]] && [[ $hr -lt 8  ]] && try_set_wall "Morning" && exit 1
-  [[ $hr -gt  7 ]] && [[ $hr -lt 12 ]] && try_set_wall "Early Afternoon" && try_set_wall "Afternoon" && exit 1
-  [[ $hr -gt 11 ]] && [[ $hr -lt 16 ]] && try_set_wall "Afternoon" && try_set_wall "Late Afternoon" && exit 1
-  [[ $hr -gt 15 ]] && [[ $hr -lt 18 ]] && try_set_wall "Late Afternoon" && exit 1
-  [[ $hr -gt 17 ]] && [[ $hr -lt 20 ]] && try_set_wall "Evening" && try_set_wall "Late Evening" && exit 1
-  [[ $hr -gt 19 ]] && [[ $hr -lt 22 ]] && try_set_wall "Late Evening" && exit 1
-  [[ $hr -gt 21 ]] && [[ $hr -lt 24 ]] && try_set_wall "Night" && exit 1
-  exit 0
+  [[ $hr -gt -1 ]] && [[ $hr -lt 4  ]] && try_set_wall "Night" && exit
+  [[ $hr -gt  3 ]] && [[ $hr -lt 6  ]] && try_set_wall "Early Morning" && try_set_wall "Morning" && exit
+  [[ $hr -gt  5 ]] && [[ $hr -lt 8  ]] && try_set_wall "Morning" && exit
+  [[ $hr -gt  7 ]] && [[ $hr -lt 12 ]] && try_set_wall "Early Afternoon" && try_set_wall "Afternoon" && exit
+  [[ $hr -gt 11 ]] && [[ $hr -lt 16 ]] && try_set_wall "Afternoon" && try_set_wall "Late Afternoon" && exit
+  [[ $hr -gt 15 ]] && [[ $hr -lt 18 ]] && try_set_wall "Late Afternoon" && exit
+  [[ $hr -gt 17 ]] && [[ $hr -lt 20 ]] && try_set_wall "Evening" && try_set_wall "Late Evening" && exit
+  [[ $hr -gt 19 ]] && [[ $hr -lt 22 ]] && try_set_wall "Late Evening" && exit
+  [[ $hr -gt 21 ]] && [[ $hr -lt 24 ]] && try_set_wall "Night" && exit
+  exit
 fi
 
 if [ ! -f "$wall" ]; then

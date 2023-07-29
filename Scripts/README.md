@@ -91,13 +91,13 @@ Find the password length requirement setting at:
 
 Change the match pattern from:
 
-```json
+```regex
 '^$|.{4,}+'
 ```
 
 To:
 
-```json
+```regex
 '^$|.{1,}+'
 ```
 
@@ -228,7 +228,7 @@ airport
 
 ## Version control
 
-### Disable version control for specific apps
+Disable version control for specific apps:
 
 ```bash
 defaults write -app 'Sketch' ApplePersistence -bool no

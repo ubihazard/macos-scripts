@@ -20,6 +20,9 @@ fi
 # RAM disk is not available
 [ ! -d "/Volumes/RAM" ] && exit
 
+# Profile is not available
+[ ! -e "$HOME/Library/Application Support/Firefox/Profiles/$link" ] && exit
+
 # Acquire lock
 if { set -C; 2>/dev/null > "$volatile.lock"; }; then
   trap "rm -f \"$volatile.lock\"" EXIT

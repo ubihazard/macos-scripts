@@ -7,4 +7,4 @@ import subprocess
 
 class EventListener(sublime_plugin.EventListener):
 	def on_exit(self):
-		subprocess.Popen([str(Path.home()) + '/.local/bin/subl-session-reset'])
+		subprocess.Popen([str(Path.home()) + '/.local/bin/_/subl_session_reset.sh'])

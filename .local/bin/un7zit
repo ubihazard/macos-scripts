@@ -63,7 +63,7 @@ fi
 arc="`realpath_macos "$1"`"
 
 pushd "$out"
-7za x "$arc"
+7zz x "$arc"
 popd
 
 lines=`ls -A "$out" | wc -l`

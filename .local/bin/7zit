@@ -60,5 +60,5 @@ if [ -f "$outpath$out" ]; then
 fi
 
 pushd "$path" > /dev/null
-7za a -t7z -mx9 -y -i!"$base" -xr!"*__MACOSX" -xr!"*.DS_Store" -xr!"*._*" -xr!"*.svn" -xr!"*.git" -xr!"*.hg" "$out"
+7zz a -t7z -mx9 -y -i!"$base" -xr!"*__MACOSX" -xr!"*.DS_Store" -xr!"*._*" -xr!"*.svn" -xr!"*.git" -xr!"*.hg" "$out"
 popd > /dev/null

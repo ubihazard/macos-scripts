@@ -34,12 +34,12 @@ cd "$pkgvol/$pkgroot" &> /dev/null
 if [ "$dry" = "-r" ] || [ "$dry" = "--real" ] ; then
   # Remove its files
   pkgutil --volume="$PKGVOLUME" --only-files --files "$pkg" > /tmp/pkgfiles
-  sudo bash -c 'IFS="" && for f in `cat /tmp/pkgfiles`; do rm -f "$f"; done'
+  sudo bash -c 'printf -v IFS "\n" && for f in `cat /tmp/pkgfiles`; do rm -f "$f"; done'
   rm /tmp/pkgfiles
 
   # And directories
   pkgutil --volume="$PKGVOLUME" --only-dirs  --files "$pkg" | tail -r > /tmp/pkgdirs
-  sudo bash -c 'IFS="" && for d in `cat /tmp/pkgdirs`; do rmdir "$d"; done'
+  sudo bash -c 'printf -v IFS "\n" && for d in `cat /tmp/pkgdirs`; do rmdir "$d"; done'
   rm /tmp/pkgdirs
 
   # Remove the package metadata

@@ -21,7 +21,9 @@ fi
 [ ! -d "/Volumes/RAM" ] && exit
 
 # Profile is not available
-[ ! -e "$HOME/Library/Application Support/Firefox/Profiles/$link" ] && exit
+if [ ! -d "$HOME/Library/Application Support/Firefox/Profiles/$link" ]; then
+  [ ! -L "$HOME/Library/Application Support/Firefox/Profiles/$link" ] && exit
+fi
 
 # Acquire lock
 if { set -C; 2>/dev/null > "$volatile.lock"; }; then

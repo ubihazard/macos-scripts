@@ -5,6 +5,7 @@
 [ "$PKGVOLUME" = "" ] && PKGVOLUME=/
 
 pkg=$1
+volume=$PKGVOLUME
 
 if [ "$pkg" = "" ]; then
   echo "Invalid package id"
@@ -18,4 +19,4 @@ if [ ! -f "$PKGVOLUME/var/db/receipts/$pkg.bom" ]; then
 	volume="$PKGVOLUME/System"
 fi
 
-sudo pkgutil --volume="$PKGVOLUME" --forget "$pkg"
+sudo pkgutil --volume="$volume" --forget "$pkg"

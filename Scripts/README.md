@@ -190,16 +190,10 @@ This step is supposed to be done during [root patching](#root-patching).
 
 ## Spotlight
 
-Erase (and rebuild) index on volume:
+Erase and rebuild index on volume:
 
 ```bash
 sudo mdutil -E /Volumes/Data
-```
-
-Disable searching of volume:
-
-```bash
-sudo mdutil -d /Volumes/Data
 ```
 
 Disable indexing of volume:
@@ -211,9 +205,7 @@ sudo mdutil -i off /Volumes/Data
 Disable Spotlight on all volumes:
 
 ```bash
-sudo mdutil -a -E
-sudo mdutil -a -d
-sudo mdutil -a -i off
+sudo mdutil -a -E && sudo mdutil -a -i off
 ```
 
 ## Airport

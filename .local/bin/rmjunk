@@ -1,5 +1,13 @@
 #!/bin/bash
 
+act="-delete"
+[ "$RMJUNK_LIST" == "yes" ] && act=""
+
+if [ $# -eq 0 ]; then
+  find . -type f -name "__MACOSX" $act -or -type f -name ".DS_Store" $act -or -type f -name "._*" $act
+  exit
+fi
+
 for i in "$@"; do
-  find "$i" -type f -name "__MACOSX" -delete -or -type f -name ".DS_Store" -delete -or -type f -name "._*" -delete
+  find "$i" -type f -name "__MACOSX" $act -or -type f -name ".DS_Store" $act -or -type f -name "._*" $act
 done

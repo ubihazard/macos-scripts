@@ -11,7 +11,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 #defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 ```
 
-This doesn’t seem to work for external drives (nor it have ever worked in older macOS versions). Use [alternative file manager](https://ranger.github.io/ "ranger") instead of Finder to prevent `.DS_Store` literring everywhere.
+This doesn’t seem to work for external drives (nor it has ever worked, even in older macOS). Use alternative file manager instead of Finder to prevent `.DS_Store` literring everywhere, e.g.: [ForkLift](https://binarynights.com/) (graphical) or [Ranger](https://ranger.github.io/) (console-based).
 
 ### Disable Time Machine prompts
 

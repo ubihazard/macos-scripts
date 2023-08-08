@@ -30,7 +30,7 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
 (Mojave, Catalina, and Big Sur only.)
 
-Apple has disabled sub-pixel font anti-aliasing starting with Mojave while dropping support for the last non-retina iMac and MacBook models. When using macOS with standard low pixel density display, it can be re-enabled with:
+Apple has disabled sub-pixel font anti-aliasing starting with Mojave while dropping support for the last non-retina iMac and MacBook models. When using macOS with regular pixel density display, it can be re-enabled with:
 
 ```bash
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
@@ -44,7 +44,7 @@ defaults write -g AppleFontSmoothing -int $value # 0..3
 
 The best `$value` depends on your particular display pixel density and resolution.
 
-Note that these two settings are mutually exclusive and shouldn’t be used together. Also note that since Monterey neither setting can be changed because the ability to configure font anti-aliasing has been removed from the OS completely, along with sub-pixel AA itself.
+Note that these two settings are mutually exclusive and shouldn’t be used together. Also note that since Monterey neither setting can be changed because the ability to configure font anti-aliasing has been removed from the OS, along with sub-pixel AA itself, which had been gone already in Big Sur. (`AppleFontSmoothing` can still be adjusted in Big Sur.)
 
 ### Enable HiDPI resolutions for non-retina displays
 

@@ -26,13 +26,33 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 ```
 
+### Enable sub-pixel anti-aliasing for non-retina displays
+
+(Mojave, Catalina, and Big Sur only.)
+
+Apple has disabled sub-pixel font anti-aliasing starting with Mojave while dropping support for the last non-retina iMac and MacBook models. When using macOS with standard low pixel density display, it can be re-enabled with:
+
+```bash
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
+```
+
+Alternatively, you can leave sub-pixel AA disabled and control the strength of regular font smoothing instead (grayscale anti-aliasing):
+
+```bash
+defaults write -g AppleFontSmoothing -int $value # 0..3
+```
+
+The best `$value` depends on your particular display pixel density and resolution.
+
+Note that these two settings are mutually exclusive and shouldn’t be used together. Also note that since Monterey neither setting can be changed because the ability to configure font anti-aliasing has been removed from the OS completely, along with sub-pixel AA itself.
+
 ### Enable HiDPI resolutions for non-retina displays
 
 ```bash
 sudo defaults write /Library/Preferences/com.apple.windowserver.plist DisplayResolutionEnabled -bool true
 ```
 
-Log out and back in for the change to take effect. Unfortunately, this doesn‘t enable all resolutions that are technically possible. To unlock all resolutions a third-party app like **SwitchResX** is needed.
+Log out and back in for the change to take effect. Unfortunately, this doesn’t enable all resolutions that are technically possible. To unlock all resolutions a third-party app like **SwitchResX** is needed.
 
 ## Power
 
@@ -180,7 +200,7 @@ rmdir ~/.local/root
 
 ### Rebuild kernel cache (Big Sur and later)
 
-Rebuilding kernel cache is also different since Big Sur. Run the following command before `bless`ing and creating a snapshot if you’ve made changes to the system‘s kernel extensions:
+Rebuilding kernel cache is also different since Big Sur. Run the following command before `bless`ing and creating a snapshot if you’ve made changes to the system’s kernel extensions:
 
 ```bash
 sudo kmutil install --force --update-all --volume-root ~/.local/root
@@ -254,7 +274,7 @@ iconutil -c icns icon.iconset
 ```bash
 drutil tray eject
 
-# If it‘s stuck:
+# If it’s stuck:
 hdiutil detach -force "/Volumes/DVD Volume Name"
 ```
 

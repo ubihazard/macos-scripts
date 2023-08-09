@@ -228,6 +228,17 @@ Disable Spotlight on all volumes:
 sudo mdutil -a -E && sudo mdutil -a -i off
 ```
 
+Disable the menu bar Spotlight icon on Catalina and earlier:
+
+```bash
+sudo mount -uw / # If on Catalina
+sudo chmod -x /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+```
+
+(Reboot is required.)
+
+On macOS Big Sur and later the Spotlight icon can be easily hidden in Dock & Menu Bar preferences.
+
 ## Airport
 
 Control Airport from terminal:

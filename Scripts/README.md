@@ -237,7 +237,7 @@ sudo chmod -x /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 (Reboot is required.)
 
-On macOS Big Sur and later the Spotlight icon can be easily hidden in Dock & Menu Bar preferences.
+On Big Sur and later the Spotlight icon can be easily hidden in Dock & Menu Bar preferences.
 
 ## Airport
 

@@ -168,7 +168,7 @@ defaults write com.apple.finder QuitMenuItem -bool true
 Up until Big Sur rebuilding of the kernel kext cache could be done with:
 
 ```bash
-sudo kextcache -i / && sudo kextcache -u /
+sudo kextcache -i /
 ```
 
 On Catalina the root volume [has to be mounted in write mode](#mount-root-volume-as-writable).

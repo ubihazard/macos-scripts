@@ -59,6 +59,7 @@ if [ -f "$outpath$out" ]; then
   fi
 fi
 
+printf -v IFS "\n"
 pushd "$path" > /dev/null
 for i in $base; do
   echo $i

@@ -9,16 +9,16 @@ cd /
 
 function try_set_wall()
 {
-  wall=`COLUMNS=1 ls $HOME/Pictures/Wallpapers/Time\ of\ Day | grep "^$1\."`
-  if [ -f "$HOME/Pictures/Wallpapers/Time of Day/$wall" ]; then
-    "$cmd" "$HOME/Pictures/Wallpapers/Time of Day/$wall"
+  wall=`COLUMNS=1 ls $HOME/Pictures/Wallpapers/Dynamic | grep "^$1\."`
+  if [ -f "$HOME/Pictures/Wallpapers/Dynamic/$wall" ]; then
+    "$cmd" "$HOME/Pictures/Wallpapers/Dynamic/$wall"
     return 1
   fi
   return 0
 }
 
-if [ "$wall" == "--timeofday" ]; then
-  if [ ! -d "$HOME/Pictures/Wallpapers/Time of Day" ]; then
+if [ "$wall" == "--dynamic" ]; then
+  if [ ! -d "$HOME/Pictures/Wallpapers/Dynamic" ]; then
     echo "Time-based wallpaper selection is not available"
     exit 1
   fi
@@ -45,4 +45,9 @@ if [ ! -f "$wall" ]; then
   exit 1
 fi
 
-osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$wall\""
+which ChangeMenuBarColor > /dev/null 2>&1
+if [ $? -eq 0 ] && false; then
+  ChangeMenuBarColor SolidColor '#ececec' "$wall"
+else
+  osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$wall\""
+fi

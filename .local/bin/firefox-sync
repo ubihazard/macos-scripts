@@ -1,9 +1,12 @@
 #!/bin/bash
 
 launchctl=no
+ramsize=512
+ramon=no
 
 [ $# -eq 0 ] && exit 1
 [ $# -gt 1 ] && launchctl=$2
+[ $# -gt 2 ] && ramsize=$3 && ramon=yes
 
 link=$1
 static=static-$1
@@ -13,24 +16,27 @@ IFS=
 set -efu
 
 if [ "$launchctl" = "yes" ]; then
-  ffox=`ps ax | grep -i firefox.app/contents/macos/firefox | grep -v grep`
-  [ "$ffox" = "" ] && exit # Firefox is not running
+  if [ ! -d "/Volumes/RAM" ] && [ "$ramon" = "yes" ]; then
+    $HOME/.local/bin/ramdisk $ramsize
+  else
+    ffox=`ps ax | grep -i firefox.app/contents/macos/firefox | grep -v grep | cat`
+    [ "$ffox" = "" ] && exit # Firefox is not running
+  fi
 fi
 
 # RAM disk is not available
-[ ! -d "/Volumes/RAM" ] && exit
+[ ! -d "/Volumes/RAM" ] && exit 1
 
 # Profile is not available
 if [ ! -d "$HOME/Library/Application Support/Firefox/Profiles/$link" ]; then
-  [ ! -L "$HOME/Library/Application Support/Firefox/Profiles/$link" ] && exit
+  [ ! -L "$HOME/Library/Application Support/Firefox/Profiles/$link" ] && exit 1
 fi
 
 # Acquire lock
 if { set -C; 2>/dev/null > "$volatile.lock"; }; then
   trap "rm -f \"$volatile.lock\"" EXIT
 else
-  # Lock exists
-  exit
+  exit # Lock exists
 fi
 
 cd "$HOME/Library/Application Support/Firefox/Profiles"

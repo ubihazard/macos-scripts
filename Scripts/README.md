@@ -232,10 +232,10 @@ Disable the menu bar Spotlight icon on Catalina and earlier:
 
 ```bash
 sudo mount -uw / # If on Catalina
-sudo chmod -x /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 ```
 
-(Reboot is required.)
+A reboot is required. Note that it will also disable the search functionality in Finder too. So it’s only useful if you want to replace the built-in search functionality with a third-party app, like **EasyFind**.
 
 On Big Sur and later the Spotlight icon can be easily hidden in Dock & Menu Bar preferences.
 

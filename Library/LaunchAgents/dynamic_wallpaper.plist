@@ -7,7 +7,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/Users/user/.local/bin/wallpaper</string>
-    <string>--timeofday</string>
+    <string>--dynamic</string>
   </array>
   <key>StartInterval</key>
   <integer>1800</integer>

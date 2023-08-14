@@ -2,7 +2,7 @@
 
 ## about:config tweaks
 
-Increase the amount of RAM used for caching:
+Set the amount of RAM used for caching:
 
 | browser.cache.memory.capacity | 128
 | - | -

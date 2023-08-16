@@ -1,3 +1,5 @@
 #!/bin/bash
 
-RMJUNK_LIST=yes rmjunk $@
+for i in "$@"; do
+  RMJUNK_LIST=yes rmjunk "$i"
+done

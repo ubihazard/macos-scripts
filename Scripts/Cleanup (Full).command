@@ -5,11 +5,11 @@
 cd "$HOME"
 [ $? -ne 0 ] && exit 1
 
-# Ruby gems
+# Ruby old gems
 which gem > /dev/null
 [ $? -eq 0 ] && gem cleanup
 
-# NPM (Node.js)
+# npm cache
 which npm > /dev/null
 [ $? -eq 0 ] && npm cache clean --force
 
